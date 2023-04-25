@@ -12,14 +12,22 @@ function Form(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.addTask(name);
-    setName("");
-  }
-  const notify = () => {
-toast.success('Task Added !', {
+    if(name && name){
+      props.addTask(name);
+    
+    toast.success('Task Added !', {
             position: toast.POSITION.TOP_RIGHT
         });
+
+        setName("");
+    }
+    else{
+     toast.warning('Add the Task !', {
+            position: toast.POSITION.TOP_RIGHT
+        });
+    }
   }
+
   return (
     <form onSubmit={handleSubmit}>
       <h2 className="label-wrapper">
@@ -36,7 +44,7 @@ toast.success('Task Added !', {
         value={name}
         onChange={handleChange}
       />
-      <button type="submit" onClick={notify} className="btn btn__primary btn__lg">
+      <button type="submit"  className="btn btn__primary btn__lg">
         Add
       </button>
               <ToastContainer />
